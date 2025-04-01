@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.7.2.min.js"></script>
+</head>
+<body>
+    <h1>Аналітика</h1>
+
+    <h2>Plotly Dashboard</h2>
+    <div id="plotly-sales-by-category"></div>
+    <div id="plotly-sales-pie"></div>
+    <div id="plotly-orders-by-month"></div>
+    <div id="plotly-average-order-value"></div>
+    <div id="plotly-top-selling-products"></div>
+    <div id="plotly-average-discount"></div>
+
+    <h2>Bokeh Dashboard</h2>
+    <div id="bokeh-sales-by-category"></div>
+    <div id="bokeh-sales-pie"></div>
+    <div id="bokeh-orders-by-month"></div>
+    <div id="bokeh-average-order-value"></div>
+    <div id="bokeh-top-selling-products"></div>
+    <div id="bokeh-average-discount"></div>
+
+    <script>
+        // Plotly Dashboard
+        fetch('/api/dashboard/plotly/sales_by_category/')
+        .then(response => response.json())
+        .then(data => Plotly.newPlot('plotly-sales-by-category', JSON.parse(data)));
+
+        fetch('/api/dashboard/plotly/sales_pie/')
+        .then(response => response.json())
+        .then(data => Plotly.newPlot('plotly-sales-pie', JSON.parse(data)));
+
+        fetch('/api/dashboard/plotly/orders_by_month/')
+        .then(response => response.json())
+        .then(data => Plotly.newPlot('plotly-orders-by-month', JSON.parse(data)));
+
+        fetch('/api/dashboard/plotly/average_order_value/')
+        .then(response => response.json())
+        .then(data => Plotly.newPlot('plotly-average-order-value', JSON.parse(data)));
+
+        fetch('/api/dashboard/plotly/top_selling_products/')
+        .then(response => response.json())
+        .then(data => Plotly.newPlot('plotly-top-selling-products', JSON.parse(data)));
+
+        // Bokeh Dashboard
+        fetch('/api/dashboard/bokeh/sales_by_category/')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('bokeh-sales-by-category').innerHTML = data.div;
+            const scriptTag = document.createElement("script");
+            scriptTag.textContent = data.script.replace(/<script.*?>|<\/script>/g, "");
+            document.body.appendChild(scriptTag);
+        });
+
+        fetch('/api/dashboard/bokeh/average_order_value/')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('bokeh-average-order-value').innerHTML = data.div;
+            const scriptTag = document.createElement("script");
+            scriptTag.textContent = data.script.replace(/<script.*?>|<\/script>/g, "");
+            document.body.appendChild(scriptTag);
+        });
+
+        fetch('/api/dashboard/bokeh/top_selling_products/')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('bokeh-top-selling-products').innerHTML = data.div;
+            const scriptTag = document.createElement("script");
+            scriptTag.textContent = data.script.replace(/<script.*?>|<\/script>/g, "");
+            document.body.appendChild(scriptTag);
+        });
+
+        fetch('/api/dashboard/bokeh/average_discount/')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('bokeh-average-discount').innerHTML = data.div;
+            const scriptTag = document.createElement("script");
+            scriptTag.textContent = data.script.replace(/<script.*?>|<\/script>/g, "");
+            document.body.appendChild(scriptTag);
+        });
+    </script>
+</body>
+</html>
