@@ -20,4 +20,5 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('', include('product.urls')),
     path('api/', include('analytics.urls')),
+    path('performance/', include('performance.urls')),
 ]
