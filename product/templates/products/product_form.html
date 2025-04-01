@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Додавання/Редагування продукту{% endblock %}
+
+{% block content %}
+    <h1>{% if product %}Редагувати продукт{% else %}Додати новий продукт{% endif %}</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Зберегти</button>
+    </form>
+
+    {% if product %}
+        <a href="{% url 'product_detail' product.id %}">Переглянути деталі</a>
+    {% else %}
+        <a href="{% url 'product_list' %}">Назад до списку</a>
+    {% endif %}
+{% endblock %}
