@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Деталі продукту{% endblock %}
+
+{% block content %}
+    <h1>{{ product.name }}</h1>
+    <p>Ціна: ${{ product.price }}</p>
+    <p>Опис: {{ product.description }}</p>
+    <p>Категорія: {{ product.category.name }}</p>
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" />
+
+    <a href="{% url 'product_edit' product.id %}">Редагувати</a>
+{% endblock %}

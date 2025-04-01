@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Список продуктів{% endblock %}
+
+{% block content %}
+    <h1>Список продуктів</h1>
+    <a href="{% url 'product_add' %}">Додати новий продукт</a>
+    <ul>
+        {% for product in products %}
+            <li>
+                <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a> - ${{ product.price }}
+                <form action="{% url 'product_delete' product.pk %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Видалити</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

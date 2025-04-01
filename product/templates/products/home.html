@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Головна - ClothingStore{% endblock %}
+
+{% block content %}
+    <h1>Ласкаво просимо до ClothingStore</h1>
+    <p>Найкращий магазин одягу</p>
+
+    <h2>Наші товари</h2>
+    {% if products %}
+        <ul>
+            {% for product in products %}
+                <li>
+                    <a href="{% url 'product_detail' product.id %}">{{ product.name }}</a> - ${{ product.price }}
+                    (<a href="{% url 'product_edit' product.id %}">Редагувати</a>)
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Немає доступних товарів.</p>
+    {% endif %}
+
+    <a href="{% url 'product_add' %}">Додати товар</a>
+{% endblock %}

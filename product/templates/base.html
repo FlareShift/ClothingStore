@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ClothingStore{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; padding: 0; }
+        header { background: #333; color: white; padding: 15px; text-align: center; }
+        nav { margin: 10px 0; text-align: center; }
+        nav a { margin: 0 10px; color: #333; text-decoration: none; font-weight: bold; }
+        main { max-width: 800px; margin: auto; }
+        footer { text-align: center; padding: 15px; margin-top: 20px; background: #eee; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ClothingStore</h1>
+        <nav>
+            <a href="{% url 'home' %}">Головна</a>
+            <a href="{% url 'product_list' %}">Товари</a>
+            <a href="{% url 'product_add' %}">Додати товар</a>
+            <a href="/admin/">Адмінка</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 ClothingStore</p>
+    </footer>
+</body>
+</html>
